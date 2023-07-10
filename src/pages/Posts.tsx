@@ -1,8 +1,10 @@
 import { ReactElement } from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { postsEndPoint } from "../json/urlEndPoints.json";
+import { Filter } from "../components/posts/Filter";
 export function Posts(): ReactElement {
   let posts = useLoaderData() as post[];
+
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
   if (userId) {
@@ -11,6 +13,7 @@ export function Posts(): ReactElement {
   return (
     <main className="container">
       <h1 className="page-title">Posts</h1>
+      <Filter />
       <div className="card-grid">
         {posts.map(({ id, title, body }) => {
           return (
