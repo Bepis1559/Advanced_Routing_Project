@@ -1,0 +1,6 @@
+{
+    "usersEndPoint" : "/users",
+    "postsEndPoint" : "/posts",
+    "commentsEndPoint" :  "/comments",
+    "todosEndPoint" :   "/todos"
+}
