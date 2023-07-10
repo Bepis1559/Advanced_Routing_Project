@@ -2,9 +2,14 @@ import { ReactElement } from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { postsEndPoint } from "../json/urlEndPoints.json";
 import { Filter } from "../components/posts/Filter";
-export function Posts(): ReactElement {
-  let posts = useLoaderData() as post[];
 
+type useLoaderDataType = {
+  posts: post[];
+  users: user[];
+};
+
+export function Posts(): ReactElement {
+  let { posts } = useLoaderData() as useLoaderDataType;
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
   if (userId) {

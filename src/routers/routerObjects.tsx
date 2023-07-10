@@ -5,7 +5,7 @@ import { Posts } from "../pages/Posts";
 import { Error } from "../pages/Error";
 import { Todos } from "../pages/Todos";
 import { Post } from "../pages/Post";
-import { postLoader, userLoader } from "./loaders";
+import { postLoader, postsLoader, userLoader } from "./loaders";
 import { User } from "../pages/User";
 import { Navigate } from "react-router-dom";
 import { Users } from "../pages/Users";
@@ -33,7 +33,8 @@ export const usersRoute = createRouterObject(
 export const postsRoute = createRouterObject(
   postsEndPoint,
   <Posts />,
-  async ({ request }) => getAll(postsUrl, request.signal as RequestInit),
+  async ({ request }) =>
+    postsLoader(postsUrl, usersURL, request.signal as RequestInit),
   <Error />,
 );
 

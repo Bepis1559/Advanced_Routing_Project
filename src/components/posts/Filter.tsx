@@ -1,7 +1,13 @@
 import { ReactElement } from "react";
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
+
+type useLoaderDataType = {
+  posts: post[];
+  users: user[];
+};
 
 export function Filter(): ReactElement {
+  const { users } = useLoaderData() as useLoaderDataType;
   return (
     <Form method="get" action="/posts" className="form mb-4">
       <div className="form-row">
@@ -13,16 +19,11 @@ export function Filter(): ReactElement {
           <label htmlFor="userId">Author</label>
           <select typeof="search" name="userId" id="userId">
             <option value="">Any</option>
-            <option value="1">Leanne Graham</option>
-            <option value="2">Ervin Howell</option>
-            <option value="3">Clementine Bauch</option>
-            <option value="4">Patricia Lebsack</option>
-            <option value="5">Chelsey Dietrich</option>
-            <option value="6">Mrs. Dennis Schulist</option>
-            <option value="7">Kurtis Weissnat</option>
-            <option value="8">Nicholas Runolfsdottir V</option>
-            <option value="9">Glenna Reichert</option>
-            <option value="10">Clementina DuBuque</option>
+            {users.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
           </select>
         </div>
         <button type="button" className="btn">

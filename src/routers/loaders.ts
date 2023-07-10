@@ -44,3 +44,13 @@ export async function postLoader(
 
   return [currentUser, currentPost, currentPostComments];
 }
+
+export async function postsLoader(
+  postsUrl: string,
+  usersUrl: string,
+  signal: RequestInit,
+) {
+  const posts: post[] = await getAll(postsUrl, signal);
+  const users: user[] = await getAll(usersUrl, signal);
+  return { posts: posts, users: users };
+}
