@@ -1,13 +1,12 @@
 import { ReactElement } from "react";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form } from "react-router-dom";
 
-type useLoaderDataType = {
-  posts: post[];
+type props = {
+  userId: string;
   users: user[];
 };
 
-export function Filter(): ReactElement {
-  const { users } = useLoaderData() as useLoaderDataType;
+export function Filter({ users, userId }: props): ReactElement {
   return (
     <Form method="get" action="/posts" className="form mb-4">
       <div className="form-row">
@@ -17,7 +16,11 @@ export function Filter(): ReactElement {
         </div>
         <div className="form-group">
           <label htmlFor="userId">Author</label>
-          <select typeof="search" name="userId" id="userId">
+          <select
+            defaultValue={userId ?? ""}
+            typeof="search"
+            name="userId"
+            id="userId">
             <option value="">Any</option>
             {users.map(({ id, name }) => (
               <option key={id} value={id}>
@@ -26,7 +29,7 @@ export function Filter(): ReactElement {
             ))}
           </select>
         </div>
-        <button type="button" className="btn">
+        <button type="submit" className="btn">
           Filter
         </button>
       </div>

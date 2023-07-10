@@ -9,7 +9,8 @@ type useLoaderDataType = {
 };
 
 export function Posts(): ReactElement {
-  let { posts } = useLoaderData() as useLoaderDataType;
+  // eslint-disable-next-line prefer-const
+  let { users, posts } = useLoaderData() as useLoaderDataType;
   const [searchParams] = useSearchParams();
   const userId = searchParams.get("userId");
   if (userId) {
@@ -18,7 +19,7 @@ export function Posts(): ReactElement {
   return (
     <main className="container">
       <h1 className="page-title">Posts</h1>
-      <Filter />
+      <Filter userId={userId ?? ""} users={users} />
       <div className="card-grid">
         {posts.map(({ id, title, body }) => {
           return (
