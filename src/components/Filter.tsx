@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { Form } from "react-router-dom";
+import { FormGroup } from "./FormGroup";
 
 type props = {
   userId: string;
@@ -15,21 +16,7 @@ export function Filter({ users, userId, query }: props): ReactElement {
           <label htmlFor="query">Query</label>
           <input defaultValue={query} type="search" name="query" id="query" />
         </div>
-        <div className="form-group">
-          <label htmlFor="userId">Author</label>
-          <select
-            defaultValue={userId ?? ""}
-            typeof="search"
-            name="userId"
-            id="userId">
-            <option value="">Any</option>
-            {users.map(({ id, name }) => (
-              <option key={id} value={id}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <FormGroup selectDefaultValue={userId ?? ""} users={users} />
         <button type="submit" className="btn">
           Filter
         </button>

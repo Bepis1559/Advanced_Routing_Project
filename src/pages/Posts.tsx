@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
-import { Filter } from "../components/posts/Filter";
+import { Filter } from "../components/Filter";
 import { Card } from "../components/Card";
 
 type useLoaderDataType = {
