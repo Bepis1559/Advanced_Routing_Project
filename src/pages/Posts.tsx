@@ -9,17 +9,11 @@ type useLoaderDataType = {
 };
 
 export function Posts(): ReactElement {
-  // eslint-disable-next-line prefer-const
-  let { users, posts } = useLoaderData() as useLoaderDataType;
+  const { users, posts } = useLoaderData() as useLoaderDataType;
   const searchParams = useSearchParams();
   const userId = searchParams[0].get("userId");
   const query = searchParams[0].get("query");
-  // console.log(userId);
-  // console.log(query);
-  // console.log(posts.length);
-  // if (userId) {
-  //   posts = posts.filter((post) => post.userId == Number(userId));
-  // }
+
   return (
     <main className="container">
       <h1 className="page-title">Posts</h1>
