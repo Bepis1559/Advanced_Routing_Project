@@ -25,7 +25,7 @@ export function NewPost(): ReactElement {
           </div>
         </div>
         <div className="form-row form-btn-row">
-          <Link to={".."} className="btn btn-outline">
+          <Link to={"/posts"} className="btn btn-outline">
             Cancel
           </Link>
           <button disabled={isSubmitting} type="submit" className="btn">
