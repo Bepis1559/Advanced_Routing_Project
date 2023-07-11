@@ -14,15 +14,18 @@ export function Posts(): ReactElement {
   const userId = searchParams[0].get("userId");
   const query = searchParams[0].get("query");
 
-  console.log(posts);
-  console.log(userId);
-
   return (
     <main className="container">
       <h1 className="page-title">
         Posts
         <div className="title-btns">
-          <Link className="btn btn-outline" to="/posts/new">
+          <Link
+            // onClick={(e) => {
+            //   const link = e.currentTarget as HTMLAnchorElement;
+            //   return console.log("Navigating to:", link.href);
+            // }}
+            className="btn btn-outline"
+            to="new">
             New
           </Link>
         </div>

@@ -58,7 +58,7 @@ export async function postsLoader(
     ? (postsUrl = `${postsUrl}?q=${query}&userId=${userId}`)
     : (postsUrl = `${postsUrl}?q=${query}`);
 
-  console.log(postsUrl);
+  // console.log(postsUrl);
   const posts: post[] = await getAll(postsUrl, signal);
   // const users: user[] = await getAll(usersUrl, signal);
   return { posts: posts };

@@ -7,7 +7,12 @@ import { Todos } from "../pages/Todos";
 import { Post } from "../pages/Post";
 import { postLoader, postsLoader, userLoader } from "./loaders";
 import { User } from "../pages/User";
-import { ActionFunction, LoaderFunction, Navigate } from "react-router-dom";
+import {
+  ActionFunction,
+  LoaderFunction,
+  Navigate,
+  RouteObject,
+} from "react-router-dom";
 import { Users } from "../pages/Users";
 import { NewPost } from "../pages/NewPost";
 import { newPostAction } from "./actions";
@@ -30,6 +35,14 @@ export const usersRoute = createRouterObject(
   <Users />,
   async ({ request }) => getAll(usersURL, request.signal as RequestInit),
   <Error />,
+);
+
+export const newPostRoute = createRouterObject(
+  `${postsEndPoint}/new`,
+  <NewPost />,
+  undefined,
+  <Error />,
+  async ({ request }) => newPostAction(postsUrl, request as Request),
 );
 
 export const postsRoute = createRouterObject(
@@ -81,26 +94,20 @@ export const userRoute = createRouterObject(
   <Error />,
 );
 
-export const newPostRoute = createRouterObject(
-  `${postsEndPoint}/new`,
-  <NewPost />,
-  undefined,
-  <Error />,
-  async ({ request }) => newPostAction(postsUrl, request as Request),
-);
-
 function createRouterObject(
   path: string,
   element: ReactElement,
   loader?: LoaderFunction,
   errorElement?: ReactElement,
   action?: ActionFunction,
-) {
+  children?: RouteObject[],
+): RouteObject {
   return {
-    path: path,
-    loader: loader,
-    element: element,
-    errorElement: errorElement,
-    action: action,
+    path,
+    loader,
+    element,
+    errorElement,
+    action,
+    children,
   };
 }

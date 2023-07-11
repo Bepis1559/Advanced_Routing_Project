@@ -1,8 +1,10 @@
 import { ReactElement } from "react";
-import { Form, Link, useNavigation } from "react-router-dom";
+import { Form, Link, useLocation, useNavigation } from "react-router-dom";
 import { FormGroup } from "../components/FormGroup";
 
 export function NewPost(): ReactElement {
+  const location = useLocation();
+  console.log("Current URL:", location.pathname);
   const { state } = useNavigation();
   const isSubmitting = state == "submitting" || state == "loading";
 
@@ -25,7 +27,14 @@ export function NewPost(): ReactElement {
           </div>
         </div>
         <div className="form-row form-btn-row">
-          <Link to={"/posts"} className="btn btn-outline">
+          <Link
+            relative="path"
+            // onClick={(e) => {
+            //   const link = e.currentTarget as HTMLAnchorElement;
+            //   return console.log("Navigating to:", link.href);
+            // }}
+            to={".."}
+            className="btn btn-outline">
             Cancel
           </Link>
           <button disabled={isSubmitting} type="submit" className="btn">
