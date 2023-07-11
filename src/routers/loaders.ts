@@ -49,7 +49,15 @@ export async function postsLoader(
   postsUrl: string,
   usersUrl: string,
   signal: RequestInit,
+  url: string,
 ) {
+  const searchParams = new URL(url).searchParams;
+  const query = searchParams.get("query");
+  const userId = searchParams.get("userId");
+  userId
+    ? (postsUrl = `${postsUrl}?q=${query}&userId=${userId}`)
+    : (postsUrl = `${postsUrl}?q=${query}`);
+
   const posts: post[] = await getAll(postsUrl, signal);
   const users: user[] = await getAll(usersUrl, signal);
   return { posts: posts, users: users };

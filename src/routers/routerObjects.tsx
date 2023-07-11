@@ -33,8 +33,8 @@ export const usersRoute = createRouterObject(
 export const postsRoute = createRouterObject(
   postsEndPoint,
   <Posts />,
-  async ({ request }) =>
-    postsLoader(postsUrl, usersURL, request.signal as RequestInit),
+  async ({ request: { signal, url } }) =>
+    postsLoader(postsUrl, usersURL, signal as RequestInit, url),
   <Error />,
 );
 

@@ -3,16 +3,17 @@ import { Form } from "react-router-dom";
 
 type props = {
   userId: string;
+  query: string;
   users: user[];
 };
 
-export function Filter({ users, userId }: props): ReactElement {
+export function Filter({ users, userId, query }: props): ReactElement {
   return (
     <Form method="get" action="/posts" className="form mb-4">
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="query">Query</label>
-          <input type="search" name="query" id="query" />
+          <input defaultValue={query} type="search" name="query" id="query" />
         </div>
         <div className="form-group">
           <label htmlFor="userId">Author</label>

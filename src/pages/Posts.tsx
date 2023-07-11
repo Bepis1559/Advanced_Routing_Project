@@ -11,15 +11,19 @@ type useLoaderDataType = {
 export function Posts(): ReactElement {
   // eslint-disable-next-line prefer-const
   let { users, posts } = useLoaderData() as useLoaderDataType;
-  const [searchParams] = useSearchParams();
-  const userId = searchParams.get("userId");
-  if (userId) {
-    posts = posts.filter((post) => post.userId == Number(userId));
-  }
+  const searchParams = useSearchParams();
+  const userId = searchParams[0].get("userId");
+  const query = searchParams[0].get("query");
+  // console.log(userId);
+  // console.log(query);
+  // console.log(posts.length);
+  // if (userId) {
+  //   posts = posts.filter((post) => post.userId == Number(userId));
+  // }
   return (
     <main className="container">
       <h1 className="page-title">Posts</h1>
-      <Filter userId={userId ?? ""} users={users} />
+      <Filter userId={userId ?? ""} query={query ?? ""} users={users} />
       <div className="card-grid">
         {posts.map(({ id, title, body }) => {
           return (
