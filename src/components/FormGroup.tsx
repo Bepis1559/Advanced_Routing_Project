@@ -3,10 +3,14 @@ import { ReactElement } from "react";
 import { fetchUsers } from "../helpers/fetchUsers";
 
 type props = {
+  isAnyOptionNeeded: boolean;
   selectDefaultValue: string;
 };
 
-export function FormGroup({ selectDefaultValue }: props): ReactElement {
+export function FormGroup({
+  selectDefaultValue,
+  isAnyOptionNeeded,
+}: props): ReactElement {
   const usersQuery = useQuery({
     queryKey: ["users"],
     queryFn: () => fetchUsers(),
@@ -20,7 +24,8 @@ export function FormGroup({ selectDefaultValue }: props): ReactElement {
         typeof="search"
         name="userId"
         id="userId">
-        <option value="">Any</option>
+        {isAnyOptionNeeded ? <option value="">Any</option> : null}
+
         {users?.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}

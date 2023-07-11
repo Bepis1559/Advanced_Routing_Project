@@ -15,7 +15,7 @@ export function Filter({ userId, query }: props): ReactElement {
           <label htmlFor="query">Query</label>
           <input defaultValue={query} type="search" name="query" id="query" />
         </div>
-        <FormGroup selectDefaultValue={userId ?? ""} />
+        <FormGroup isAnyOptionNeeded={true} selectDefaultValue={userId ?? ""} />
         <button type="submit" className="btn">
           Filter
         </button>

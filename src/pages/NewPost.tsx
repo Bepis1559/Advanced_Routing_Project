@@ -16,7 +16,7 @@ export function NewPost(): ReactElement {
             <input type="text" name="title" id="title" />
             <div className="error-message">Required</div>
           </div>
-          <FormGroup selectDefaultValue="1" />
+          <FormGroup isAnyOptionNeeded={false} selectDefaultValue="1" />
         </div>
         <div className="form-row">
           <div className="form-group">
