@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import { Link, useLoaderData } from "react-router-dom";
-import { postsEndPoint } from "../json/urlEndPoints.json";
+import { useLoaderData } from "react-router-dom";
+import { Card } from "../components/Card";
 
 type loaderDataType = [user, post[], todo[]];
 
@@ -32,21 +32,7 @@ export function User(): ReactElement {
       <div className="card-grid">
         {posts?.map(({ userId, id: postId, title, body }) => {
           if (userId == id) {
-            return (
-              <div key={postId} className="card">
-                <div className="card-header">{title}</div>
-                <div className="card-body">
-                  <div className="card-preview-text">{body}</div>
-                </div>
-                <div className="card-footer">
-                  <Link
-                    className="btn"
-                    to={`${postsEndPoint}/${postId}/comments`}>
-                    View
-                  </Link>
-                </div>
-              </div>
-            );
+            return <Card key={postId} id={postId} title={title} body={body} />;
           }
         })}
       </div>

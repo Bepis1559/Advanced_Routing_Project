@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
-import { postsEndPoint } from "../json/urlEndPoints.json";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import { Filter } from "../components/posts/Filter";
+import { Card } from "../components/Card";
 
 type useLoaderDataType = {
   posts: post[];
@@ -19,20 +19,8 @@ export function Posts(): ReactElement {
       <h1 className="page-title">Posts</h1>
       <Filter userId={userId ?? ""} query={query ?? ""} users={users} />
       <div className="card-grid">
-        {posts.map(({ id, title, body }) => {
-          return (
-            <div key={id} className="card">
-              <div className="card-header">{title}</div>
-              <div className="card-body">
-                <div className="card-preview-text">{body}</div>
-              </div>
-              <div className="card-footer">
-                <Link className="btn" to={`${postsEndPoint}/${id}/comments`}>
-                  View
-                </Link>
-              </div>
-            </div>
-          );
+        {posts?.map(({ id, title, body }) => {
+          return <Card key={id} id={id} title={title} body={body} />;
         })}
       </div>
     </main>
