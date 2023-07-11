@@ -7,8 +7,10 @@ import { Todos } from "../pages/Todos";
 import { Post } from "../pages/Post";
 import { postLoader, postsLoader, userLoader } from "./loaders";
 import { User } from "../pages/User";
-import { Navigate } from "react-router-dom";
+import { ActionFunction, LoaderFunction, Navigate } from "react-router-dom";
 import { Users } from "../pages/Users";
+import { NewPost } from "../pages/NewPost";
+import { newPostAction } from "./actions";
 const { usersEndPoint, postsEndPoint, commentsEndPoint, todosEndPoint } =
   urlEndPoints;
 const localServerUrl = "http://127.0.0.1:3000";
@@ -78,16 +80,26 @@ export const userRoute = createRouterObject(
   <Error />,
 );
 
+export const newPostRoute = createRouterObject(
+  `${postsEndPoint}/new`,
+  <NewPost />,
+  undefined,
+  <Error />,
+  async ({ request }) => newPostAction(postsUrl, request as Request),
+);
+
 function createRouterObject(
   path: string,
   element: ReactElement,
-  loader?: loader,
+  loader?: LoaderFunction,
   errorElement?: ReactElement,
+  action?: ActionFunction,
 ) {
   return {
     path: path,
     loader: loader,
     element: element,
     errorElement: errorElement,
+    action: action,
   };
 }

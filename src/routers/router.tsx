@@ -3,6 +3,7 @@ import { App } from "../App";
 import {
   defaultRoute,
   errorRoute,
+  newPostRoute,
   postRoute,
   postsRoute,
   todosRoute,
@@ -17,6 +18,7 @@ const routes = [
   postRoute,
   todosRoute,
   postsRoute,
+  newPostRoute,
   errorRoute,
 ];
 export const router = createBrowserRouter([

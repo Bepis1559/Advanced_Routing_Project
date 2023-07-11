@@ -1,12 +1,11 @@
 import { ReactElement } from "react";
-import { Form } from "react-router-dom";
+import { Form, Link, useNavigation } from "react-router-dom";
 import { FormGroup } from "../components/FormGroup";
 
-type props = {
-  users: user[];
-};
+export function NewPost(): ReactElement {
+  const { state } = useNavigation();
+  const isSubmitting = state == "submitting" || state == "loading";
 
-export function NewPost({ users }: props): ReactElement {
   return (
     <div className="container">
       <h1 className="page-title">New Post</h1>
@@ -17,7 +16,7 @@ export function NewPost({ users }: props): ReactElement {
             <input type="text" name="title" id="title" />
             <div className="error-message">Required</div>
           </div>
-          <FormGroup selectDefaultValue="1" users={users} />
+          <FormGroup selectDefaultValue="1" />
         </div>
         <div className="form-row">
           <div className="form-group">
@@ -26,11 +25,11 @@ export function NewPost({ users }: props): ReactElement {
           </div>
         </div>
         <div className="form-row form-btn-row">
-          <a className="btn btn-outline" href="/posts">
+          <Link to={".."} className="btn btn-outline">
             Cancel
-          </a>
-          <button type="submit" className="btn">
-            Save
+          </Link>
+          <button disabled={isSubmitting} type="submit" className="btn">
+            {isSubmitting ? "Loading" : "Create"}
           </button>
         </div>
       </Form>
