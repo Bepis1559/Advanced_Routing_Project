@@ -286,13 +286,13 @@ body {
   font-weight: normal;
 }
 
-.form-group.error input,
+/* .form-group.error input,
 .form-group.error select,
 .form-group.error textarea {
   border-color: hsl(0, 100%, 50%);
-}
+} */
 
-.form-group .error-message {
+/* .form-group .error-message {
   color: hsl(0, 100%, 50%);
   font-size: 1rem;
-}
+} */

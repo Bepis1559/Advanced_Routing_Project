@@ -36,7 +36,8 @@ export const postsRoute = createRouterObject(
   postsEndPoint,
   <Posts />,
   async ({ request: { signal, url } }) =>
-    postsLoader(postsUrl, usersURL, signal as RequestInit, url),
+    // postsLoader(postsUrl, usersURL, signal as RequestInit, url),
+    postsLoader(postsUrl, signal as RequestInit, url),
   <Error />,
 );
 

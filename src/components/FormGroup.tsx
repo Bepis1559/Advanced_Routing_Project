@@ -16,11 +16,12 @@ export function FormGroup({
     queryFn: () => fetchUsers(),
   });
   const users = usersQuery.data as unknown as user[];
+
   return (
     <div className="form-group">
       <label htmlFor="userId">Author</label>
       <select
-        defaultValue={selectDefaultValue ?? ""}
+        defaultValue={selectDefaultValue}
         typeof="search"
         name="userId"
         id="userId">
