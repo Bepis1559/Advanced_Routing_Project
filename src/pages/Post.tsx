@@ -1,13 +1,18 @@
 import { ReactElement } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { usersEndPoint } from "../json/urlEndPoints.json";
-type loaderDataType = [user, post, comment[]];
+export type postLoaderDataType = {
+  currentUser: user;
+  currentPost: post;
+  currentPostComments: comment[];
+};
 
 // should have the post Title,the userName , post body , all related comments with their email and body
 export function Post(): ReactElement {
-  const [user, post, currentPostComments] = useLoaderData() as loaderDataType;
-  const { name, id } = user;
-  const { id: postId, title, body: postBody } = post;
+  const { currentUser, currentPost, currentPostComments } =
+    useLoaderData() as postLoaderDataType;
+  const { name, id } = currentUser;
+  const { id: postId, title, body: postBody } = currentPost;
   return (
     <main className="container">
       <h1 className="page-title">

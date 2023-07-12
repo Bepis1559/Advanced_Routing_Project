@@ -2,32 +2,56 @@ import { ReactElement } from "react";
 import {
   Form,
   Link,
+  useLoaderData,
   // useLocation,
   useNavigation,
 } from "react-router-dom";
 import { FormGroup } from "../components/FormGroup";
+import { postLoaderDataType } from "./Post";
 
-export function NewPost(): ReactElement {
+type props = {
+  pageTitle: string;
+};
+
+export function NewPost({ pageTitle }: props): ReactElement {
   // console.log("Current URL:", location.pathname);
   const { state } = useNavigation();
+  const data = useLoaderData() as postLoaderDataType;
+  const title = data?.currentPost.title ?? "";
+  const body = data?.currentPost.body ?? "";
+  const userId = data?.currentUser.id ?? "1";
+
   const isSubmitting = state == "submitting" || state == "loading";
 
   return (
     <div className="container">
-      <h1 className="page-title">New Post</h1>
+      <h1 className="page-title">{pageTitle}</h1>
       <Form method="post" action="/posts/new" className="form">
         <div className="form-row">
           <div className="form-group error">
             <label htmlFor="title">Title</label>
-            <input required type="text" name="title" id="title" />
+            <input
+              defaultValue={title}
+              required
+              type="text"
+              name="title"
+              id="title"
+            />
             {/* <div className="error-message">Required</div> */}
           </div>
-          <FormGroup isAnyOptionNeeded={false} selectDefaultValue="1" />
+          <FormGroup
+            isAnyOptionNeeded={false}
+            selectDefaultValue={userId.toString()}
+          />
         </div>
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="body">Body</label>
-            <textarea required name="body" id="body"></textarea>
+            <textarea
+              defaultValue={body}
+              required
+              name="body"
+              id="body"></textarea>
           </div>
         </div>
         <div className="form-row form-btn-row">

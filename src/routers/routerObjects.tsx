@@ -39,8 +39,23 @@ export const usersRoute = createRouterObject(
 
 export const newPostRoute = createRouterObject(
   `${postsEndPoint}/new`,
-  <NewPost />,
+  <NewPost pageTitle="New Post" />,
   undefined,
+  <Error />,
+  async ({ request }) => newPostAction(postsUrl, request as Request),
+);
+
+export const editPostRoute = createRouterObject(
+  `${postsEndPoint}/:id/edit`,
+  <NewPost pageTitle="Edit post" />,
+  async ({ request, params }) =>
+    postLoader(
+      postsUrl,
+      usersURL,
+      commentsUrl,
+      params as unknown as post,
+      request.signal as RequestInit,
+    ),
   <Error />,
   async ({ request }) => newPostAction(postsUrl, request as Request),
 );

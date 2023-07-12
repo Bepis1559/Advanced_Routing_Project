@@ -7,12 +7,7 @@ export async function userLoader(
   signal: RequestInit,
   params: user,
 ) {
-  const currentUser: user = await getById(
-    usersUrl,
-    params?.id,
-
-    signal,
-  );
+  const currentUser: user = await getById(usersUrl, params?.id, signal);
 
   const posts: post[] = await getAll(postsUrl, signal);
   const currentUserPosts = posts.filter(
@@ -42,7 +37,11 @@ export async function postLoader(
     (comment) => comment.postId == currentPost.id,
   );
 
-  return [currentUser, currentPost, currentPostComments];
+  return {
+    currentUser: currentUser,
+    currentPost: currentPost,
+    currentPostComments: currentPostComments,
+  };
 }
 
 export async function postsLoader(
