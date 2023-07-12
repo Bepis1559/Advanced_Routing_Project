@@ -1,10 +1,14 @@
 import { ReactElement } from "react";
-import { Form, Link, useLocation, useNavigation } from "react-router-dom";
+import {
+  Form,
+  Link,
+  // useLocation,
+  useNavigation,
+} from "react-router-dom";
 import { FormGroup } from "../components/FormGroup";
 
 export function NewPost(): ReactElement {
-  const location = useLocation();
-  console.log("Current URL:", location.pathname);
+  // console.log("Current URL:", location.pathname);
   const { state } = useNavigation();
   const isSubmitting = state == "submitting" || state == "loading";
 
@@ -38,7 +42,7 @@ export function NewPost(): ReactElement {
             Cancel
           </Link>
           <button disabled={isSubmitting} type="submit" className="btn">
-            {isSubmitting ? "Loading" : "Create"}
+            {isSubmitting ? "Loading" : "Save"}
           </button>
         </div>
       </Form>

@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 
 export async function getAll(
   url: string,
-  signal: RequestInit,
+  signal?: RequestInit,
   redirectPathIfResponseIsNotOk = "/error",
 ) {
   const res = await fetch(url, signal);
@@ -12,10 +12,10 @@ export async function getAll(
 export async function getById(
   url: string,
   id: number,
-
-  signal: RequestInit,
+  signal?: RequestInit,
   redirectPathIfResponseIsNotOk = "/error",
 ) {
+  signal ? signal : new AbortController().signal;
   url = `${url}/${id}`;
   const res = await fetch(url, signal);
   if (res.ok) return res.json();
