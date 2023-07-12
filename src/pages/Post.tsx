@@ -7,10 +7,17 @@ type loaderDataType = [user, post, comment[]];
 export function Post(): ReactElement {
   const [user, post, currentPostComments] = useLoaderData() as loaderDataType;
   const { name, id } = user;
-  const { title, body: postBody } = post;
+  const { id: postId, title, body: postBody } = post;
   return (
     <main className="container">
-      <h1 className="page-title">{title}</h1>
+      <h1 className="page-title">
+        {title}
+        <div className="title-btns">
+          <Link className="btn btn-outline" to={`/posts/${postId}/edit`}>
+            Edit
+          </Link>
+        </div>
+      </h1>
       <span className="page-subtitle">
         By: <Link to={`${usersEndPoint}/${id}`}>{name}</Link>
       </span>
