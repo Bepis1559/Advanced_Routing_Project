@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 import { Users } from "../pages/Users";
 import { NewPost } from "../pages/NewPost";
-import { editPostAction, newPostAction } from "./actions";
+import { editPostAction, createNewPostAction } from "./actions";
 const { usersEndPoint, postsEndPoint, commentsEndPoint, todosEndPoint } =
   urlEndPoints;
 const localServerUrl = "http://127.0.0.1:3000";
@@ -42,7 +42,7 @@ export const newPostRoute = createRouterObject(
   <NewPost pageTitle="New Post" />,
   undefined,
   <Error />,
-  async ({ request }) => newPostAction(postsUrl, request as Request),
+  async ({ request }) => createNewPostAction(postsUrl, request as Request),
 );
 
 export const editPostRoute = createRouterObject(
@@ -82,7 +82,7 @@ export const errorRoute = createRouterObject(
   <Error />,
 );
 export const postRoute = createRouterObject(
-  `${postsEndPoint}/:id/comments`,
+  `${postsEndPoint}/:id`,
   <Post />,
   async ({ request, params }) =>
     postLoader(

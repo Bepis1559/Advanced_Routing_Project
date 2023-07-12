@@ -16,7 +16,7 @@ export function Card({ id, title, body }: props): ReactElement {
         <div className="card-preview-text">{body}</div>
       </div>
       <div className="card-footer">
-        <Link className="btn" to={`${postsEndPoint}/${id}/comments`}>
+        <Link className="btn" to={`${postsEndPoint}/${id}`}>
           View
         </Link>
       </div>
