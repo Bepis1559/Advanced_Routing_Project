@@ -62,6 +62,12 @@ body {
   flex-direction: column;
 }
 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17em, 100%), 1fr));
+  gap: 1rem;
+}
+
 .card-header {
   font-size: 2rem;
   padding: var(--padding);
@@ -109,12 +115,6 @@ body {
 .btn:hover,
 .btn:focus {
   background: hsl(200, 100%, 35%);
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 1rem;
 }
 
 .page-title {
