@@ -1,3 +1,4 @@
+import { defer } from "react-router-dom";
 import { getAll, getById } from "../services/read";
 
 export async function userLoader(
@@ -57,9 +58,10 @@ export async function postsLoader(
     ? (postsUrl = `${postsUrl}?q=${query}&userId=${userId}`)
     : (postsUrl = `${postsUrl}?q=${query}`);
 
-  // console.log(postsUrl);
-  const posts: post[] = await getAll(postsUrl, signal);
-  // const users: user[] = await getAll(usersUrl, signal);
-  return { posts: posts };
-  // return { posts: posts, users: users };
+  // const posts: post[] = await getAll(postsUrl, signal);
+  // const result = { posts: posts };
+  const deferredResult: Record<string, Promise<post[]>> = {
+    postsPromise: getAll(postsUrl, signal),
+  };
+  return defer(deferredResult);
 }
