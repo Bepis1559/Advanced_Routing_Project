@@ -65,9 +65,11 @@ export function NewPost({ pageTitle }: props): ReactElement {
             className="btn btn-outline">
             Cancel
           </Link>
-          <button disabled={isSubmitting} type="submit" className="btn">
-            {isSubmitting ? "Loading" : "Save"}
-          </button>
+          <Link relative="path" to={".."}>
+            <button disabled={isSubmitting} type="submit" className="btn">
+              {isSubmitting ? "Loading" : "Save"}
+            </button>
+          </Link>
         </div>
       </Form>
     </div>
