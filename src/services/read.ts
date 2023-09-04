@@ -6,6 +6,10 @@ export async function getAll(
   redirectPathIfResponseIsNotOk = "/error",
 ) {
   const res = await fetch(url, signal);
+  const start = performance.now();
+  while (start > performance.now() - 1000) {
+    // artificial delay
+  }
   if (res.ok) return res.json();
   throw redirect(redirectPathIfResponseIsNotOk);
 }
