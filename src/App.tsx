@@ -4,22 +4,22 @@ import { Navbar } from "./components/Navbar";
 import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 
 export function App(): ReactElement {
-  const { state } = useNavigation();
+  // const { state } = useNavigation();
 
   return (
     <>
       <ScrollRestoration />
       <Navbar />
-      {state == "loading" ? (
+      {/* {state == "loading" ? (
         <>
           <div className="loading-spinner"></div>
           <div className="container loading">
             <Outlet />
           </div>
         </>
-      ) : (
-        <Outlet />
-      )}
+      ) : ( */}
+      <Outlet />
+      {/* )} */}
     </>
   );
 }
