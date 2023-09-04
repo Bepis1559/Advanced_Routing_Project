@@ -10,8 +10,6 @@ export function Posts(): ReactElement {
   const userId = searchParams[0].get("userId");
   const query = searchParams[0].get("query");
 
-  console.log(postsPromise);
-
   return (
     <main className="container">
       <h1 className="page-title">
