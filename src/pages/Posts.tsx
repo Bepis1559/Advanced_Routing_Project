@@ -22,13 +22,7 @@ export function Posts(): ReactElement {
       <h1 className="page-title">
         Posts
         <div className="title-btns">
-          <Link
-            // onClick={(e) => {
-            //   const link = e.currentTarget as HTMLAnchorElement;
-            //   return console.log("Navigating to:", link.href);
-            // }}
-            className="btn btn-outline"
-            to="new">
+          <Link className="btn btn-outline" to="new">
             New
           </Link>
         </div>

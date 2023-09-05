@@ -1,4 +1,5 @@
 import { redirect } from "react-router-dom";
+import { CreateDelay } from "../helpers/CreateDelay";
 
 export async function getAll(
   url: string,
@@ -6,10 +7,7 @@ export async function getAll(
   redirectPathIfResponseIsNotOk = "/error",
 ) {
   const res = await fetch(url, signal);
-  const start = performance.now();
-  while (start > performance.now() - 2000) {
-    // artificial delay
-  }
+  CreateDelay(500);
   if (res.ok) return res.json();
   throw redirect(redirectPathIfResponseIsNotOk);
 }

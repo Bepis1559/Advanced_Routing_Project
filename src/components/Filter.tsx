@@ -6,7 +6,7 @@ type props = {
   userId: string;
   query: string;
 };
-
+// Create context for the loading state of the author select and use it here too
 export function Filter({ userId, query }: props): ReactElement {
   return (
     <Form method="get" action="/posts" className="form mb-4">
@@ -15,7 +15,7 @@ export function Filter({ userId, query }: props): ReactElement {
           <label htmlFor="query">Query</label>
           <input defaultValue={query} type="search" name="query" id="query" />
         </div>
-        <FormGroup isAnyOptionNeeded={true} selectDefaultValue={userId} />
+        <FormGroup isAllOptionNeeded={true} selectDefaultValue={userId} />
         <button type="submit" className="btn">
           Filter
         </button>

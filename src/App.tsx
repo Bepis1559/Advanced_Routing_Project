@@ -10,16 +10,16 @@ export function App(): ReactElement {
     <>
       <ScrollRestoration />
       <Navbar />
-      {state == "loading" ? (
+      {/* {state == "loading" ? (
         <>
           <div className="loading-spinner"></div>
           <div className="container loading">
             <Outlet />
           </div>
         </>
-      ) : (
-        <Outlet />
-      )}
+      ) : ( */}
+      <Outlet />
+      {/* )} */}
     </>
   );
 }

@@ -47,10 +47,10 @@ export async function postLoader(
 
 export async function postsLoader(
   postsUrl: string,
-  // usersUrl: string,
   signal: RequestInit,
   url: string,
 ) {
+  const initialPostsUrl = postsUrl;
   const searchParams = new URL(url).searchParams;
   const query = searchParams.get("query") ?? "";
   const userId = searchParams.get("userId");
@@ -58,6 +58,9 @@ export async function postsLoader(
     ? (postsUrl = `${postsUrl}?q=${query}&userId=${userId}`)
     : (postsUrl = `${postsUrl}?q=${query}`);
 
+  if (userId == "0") {
+    postsUrl = initialPostsUrl;
+  }
   // const posts: post[] = await getAll(postsUrl, signal);
   // const result = { posts: posts };
   const deferredResult: Record<string, Promise<post[]>> = {
