@@ -7,7 +7,7 @@ export async function getAll(
 ) {
   const res = await fetch(url, signal);
   const start = performance.now();
-  while (start > performance.now() - 1000) {
+  while (start > performance.now() - 2000) {
     // artificial delay
   }
   if (res.ok) return res.json();

@@ -1,10 +1,17 @@
 import { ReactElement, Suspense } from "react";
-import { Await, Link, useLoaderData, useSearchParams } from "react-router-dom";
+import {
+  Await,
+  Link,
+  useAsyncValue,
+  useLoaderData,
+  useSearchParams,
+} from "react-router-dom";
 import { Filter } from "../components/Filter";
 import { Card } from "../components/Card";
+import { PostsSkeleton } from "../skeletons/PostsSkeleton";
 
 export function Posts(): ReactElement {
-  // const { posts } = useLoaderData() as useLoaderDataType;
+  // const { posts } = useLoaderData() as post[];
   const { postsPromise } = useLoaderData() as Record<string, Promise<post[]>>;
   const searchParams = useSearchParams();
   const userId = searchParams[0].get("userId");
@@ -28,16 +35,23 @@ export function Posts(): ReactElement {
       </h1>
       <Filter userId={userId ?? ""} query={query ?? ""} />
       <div className="card-grid">
-        <Suspense fallback="Loading...">
+        <Suspense fallback={<PostsSkeleton />}>
           <Await resolve={postsPromise}>
-            {(posts: post[]) =>
-              posts?.map(({ id, title, body }) => {
-                return <Card key={id} id={id} title={title} body={body} />;
-              })
-            }
+            <PostsCards />
           </Await>
         </Suspense>
       </div>
     </main>
+  );
+}
+
+function PostsCards(): ReactElement {
+  const posts = useAsyncValue() as post[];
+  return (
+    <>
+      {posts?.map(({ id, title, body }) => (
+        <Card key={id} id={id} title={title} body={body} />
+      ))}
+    </>
   );
 }
