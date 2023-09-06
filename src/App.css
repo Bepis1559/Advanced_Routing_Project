@@ -65,7 +65,7 @@ body {
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(17em, 100%), 1fr));
-  gap: 1rem;
+  gap: 1em;
 }
 
 .card-header {
