@@ -1,4 +1,4 @@
-import { ReactElement, Suspense } from "react";
+import { type ReactElement, Suspense, useEffect, useState } from "react";
 import {
   Await,
   Link,
@@ -11,11 +11,15 @@ import { Card } from "../components/Card";
 import { PostsSkeleton } from "../skeletons/PostsSkeleton";
 
 export function Posts(): ReactElement {
-  // const { posts } = useLoaderData() as post[];
+  const [arePostsGettingFiltered, setArePostsGettingFiltered] = useState(false);
   const { postsPromise } = useLoaderData() as postsDeferredResult;
   const searchParams = useSearchParams();
   const userId = searchParams[0].get("userId");
   const query = searchParams[0].get("query");
+
+  useEffect(() => {
+    setArePostsGettingFiltered(false);
+  }, [postsPromise]);
 
   return (
     <main className="container">
@@ -27,20 +31,31 @@ export function Posts(): ReactElement {
           </Link>
         </div>
       </h1>
-      <Filter userId={userId ?? ""} query={query ?? ""} />
-      <div className="card-grid">
-        <Suspense fallback={<PostsSkeleton />}>
-          <Await resolve={postsPromise}>
-            <PostsCards />
-          </Await>
-        </Suspense>
-      </div>
+      <Filter
+        setArePostsGettingFiltered={setArePostsGettingFiltered}
+        userId={userId ?? ""}
+        query={query ?? ""}
+      />
+      {arePostsGettingFiltered ? (
+        <div className="card-grid">
+          <PostsSkeleton />
+        </div>
+      ) : (
+        <div className="card-grid">
+          <Suspense fallback={<PostsSkeleton />}>
+            <Await resolve={postsPromise}>
+              <PostsCards />
+            </Await>
+          </Suspense>
+        </div>
+      )}
     </main>
   );
 }
 
 function PostsCards(): ReactElement {
   const posts = useAsyncValue() as post[];
+
   return (
     <>
       {posts?.map(({ id, title, body }) => (

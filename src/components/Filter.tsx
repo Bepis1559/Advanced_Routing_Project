@@ -1,14 +1,24 @@
-import { ReactElement } from "react";
+import type { Dispatch, ReactElement, SetStateAction } from "react";
 import { Form } from "react-router-dom";
 import { FormGroup } from "./FormGroup";
 
 type props = {
   userId: string;
   query: string;
+  setArePostsGettingFiltered: Dispatch<SetStateAction<boolean>>;
 };
-export function Filter({ userId, query }: props): ReactElement {
+export function Filter({
+  userId,
+  query,
+  setArePostsGettingFiltered,
+}: props): ReactElement {
+  const handleSubmit = () => setArePostsGettingFiltered(true);
   return (
-    <Form method="get" action="/posts" className="form mb-4">
+    <Form
+      onSubmit={handleSubmit}
+      method="get"
+      action="/posts"
+      className="form mb-4">
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="query">Query</label>
