@@ -5,6 +5,7 @@ import {
   useLoaderData,
   useSearchParams,
 } from "react-router-dom";
+import { TodosSkeleton } from "../skeletons/TodosSkeleton";
 
 export function Todos(): ReactElement {
   const { todosPromise } = useLoaderData() as todosDeferredResult;
@@ -14,7 +15,7 @@ export function Todos(): ReactElement {
   return (
     <>
       <h1 className="page-title p-3">Todos</h1>
-      <Suspense fallback={<>Loading...</>}>
+      <Suspense fallback={<TodosSkeleton />}>
         <Await resolve={todosPromise}>
           <TodosTexts userId={userId} />
         </Await>
