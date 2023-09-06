@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { usersEndPoint } from "../json/urlEndPoints.json";
 import { PostsSkeleton } from "../skeletons/PostsSkeleton";
 export function Users(): ReactElement {
-  const { usersPromise } = useLoaderData() as Record<string, Promise<user[]>>;
+  const { usersPromise } = useLoaderData() as usersDeferredResult;
 
   return (
     <main className="container">

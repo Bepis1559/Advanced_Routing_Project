@@ -63,15 +63,22 @@ export async function postsLoader(
   }
   // const posts: post[] = await getAll(postsUrl, signal);
   // const result = { posts: posts };
-  const deferredResult: Record<string, Promise<post[]>> = {
+  const deferredResult: postsDeferredResult = {
     postsPromise: getAll(postsUrl, signal),
   };
   return defer(deferredResult);
 }
 
 export function usersLoader(usersURL: string, signal: RequestInit) {
-  const deferredResult: Record<string, Promise<user[]>> = {
+  const deferredResult: usersDeferredResult = {
     usersPromise: getAll(usersURL, signal),
+  };
+  return defer(deferredResult);
+}
+
+export function TodosLoader(todosUrl: string, signal: RequestInit) {
+  const deferredResult: todosDeferredResult = {
+    todosPromise: getAll(todosUrl, signal),
   };
   return defer(deferredResult);
 }

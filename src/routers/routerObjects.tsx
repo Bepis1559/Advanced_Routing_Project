@@ -1,11 +1,16 @@
 import { ReactElement } from "react";
-import { getAll } from "../services/read";
 import urlEndPoints from "../json/urlEndPoints.json";
 import { Posts } from "../pages/Posts";
 import { Error } from "../pages/Error";
 import { Todos } from "../pages/Todos";
 import { Post } from "../pages/Post";
-import { postLoader, postsLoader, userLoader, usersLoader } from "./loaders";
+import {
+  TodosLoader,
+  postLoader,
+  postsLoader,
+  userLoader,
+  usersLoader,
+} from "./loaders";
 import { User } from "../pages/User";
 import {
   ActionFunction,
@@ -72,7 +77,8 @@ export const postsRoute = createRouterObject(
 export const todosRoute = createRouterObject(
   todosEndPoint,
   <Todos />,
-  async ({ request }) => getAll(todosUrl, request.signal as RequestInit),
+  async ({ request: { signal } }) =>
+    TodosLoader(todosUrl, signal as RequestInit),
   <Error />,
 );
 export const errorRoute = createRouterObject(

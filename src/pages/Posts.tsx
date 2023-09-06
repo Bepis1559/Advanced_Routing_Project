@@ -12,7 +12,7 @@ import { PostsSkeleton } from "../skeletons/PostsSkeleton";
 
 export function Posts(): ReactElement {
   // const { posts } = useLoaderData() as post[];
-  const { postsPromise } = useLoaderData() as Record<string, Promise<post[]>>;
+  const { postsPromise } = useLoaderData() as postsDeferredResult;
   const searchParams = useSearchParams();
   const userId = searchParams[0].get("userId");
   const query = searchParams[0].get("query");
