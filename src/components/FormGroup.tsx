@@ -1,22 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import { type ReactElement, useState } from "react";
+import { type ReactElement, useEffect } from "react";
 import { fetchUsers } from "../helpers/fetchUsers";
+import { useAtom } from "jotai";
+import { userIdAtom } from "../contexts/postsFilter";
 
 type props = {
   isAllOptionNeeded: boolean;
-  selectDefaultValue: string;
+  userId: string;
 };
 
-export function FormGroup({
-  selectDefaultValue,
-  isAllOptionNeeded,
-}: props): ReactElement {
-  const [value, setValue] = useState(selectDefaultValue);
+export function FormGroup({ userId, isAllOptionNeeded }: props): ReactElement {
+  const [selectValue, setSelectValue] = useAtom(userIdAtom);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setSelectValue(userId), []);
   const usersQuery = useQuery({
     queryKey: ["users"],
     queryFn: () => fetchUsers(),
   });
-
   const users = usersQuery.data as unknown as user[];
   const { isLoading } = usersQuery;
 
@@ -26,8 +26,8 @@ export function FormGroup({
 
       <select
         disabled={isLoading}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={selectValue}
+        onChange={(e) => setSelectValue(e.target.value)}
         typeof="search"
         name="userId"
         id="userId">

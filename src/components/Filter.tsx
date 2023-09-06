@@ -1,6 +1,13 @@
-import type { Dispatch, ReactElement, SetStateAction } from "react";
+import {
+  useEffect,
+  type Dispatch,
+  type ReactElement,
+  type SetStateAction,
+} from "react";
 import { Form } from "react-router-dom";
 import { FormGroup } from "./FormGroup";
+import { queryAtom } from "../contexts/postsFilter";
+import { useAtom } from "jotai";
 
 type props = {
   userId: string;
@@ -13,6 +20,9 @@ export function Filter({
   setArePostsGettingFiltered,
 }: props): ReactElement {
   const handleSubmit = () => setArePostsGettingFiltered(true);
+  const [inputQuery, setInputQuery] = useAtom(queryAtom);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => setInputQuery(query), []);
   return (
     <Form
       onSubmit={handleSubmit}
@@ -22,9 +32,16 @@ export function Filter({
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="query">Query</label>
-          <input defaultValue={query} type="search" name="query" id="query" />
+          <input
+            onChange={(e) => setInputQuery(e.target.value)}
+            value={inputQuery}
+            // defaultValue={query}
+            type="search"
+            name="query"
+            id="query"
+          />
         </div>
-        <FormGroup isAllOptionNeeded={true} selectDefaultValue={userId} />
+        <FormGroup isAllOptionNeeded={true} userId={userId} />
         <button type="submit" className="btn">
           Filter
         </button>
