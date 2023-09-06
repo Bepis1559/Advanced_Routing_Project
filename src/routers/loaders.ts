@@ -68,3 +68,10 @@ export async function postsLoader(
   };
   return defer(deferredResult);
 }
+
+export function usersLoader(usersURL: string, signal: RequestInit) {
+  const deferredResult: Record<string, Promise<user[]>> = {
+    usersPromise: getAll(usersURL, signal),
+  };
+  return defer(deferredResult);
+}

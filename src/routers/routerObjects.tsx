@@ -5,7 +5,7 @@ import { Posts } from "../pages/Posts";
 import { Error } from "../pages/Error";
 import { Todos } from "../pages/Todos";
 import { Post } from "../pages/Post";
-import { postLoader, postsLoader, userLoader } from "./loaders";
+import { postLoader, postsLoader, userLoader, usersLoader } from "./loaders";
 import { User } from "../pages/User";
 import {
   ActionFunction,
@@ -33,7 +33,7 @@ export const defaultRoute = createRouterObject(
 export const usersRoute = createRouterObject(
   usersEndPoint,
   <Users />,
-  async ({ request }) => getAll(usersURL, request.signal as RequestInit),
+  async ({ request }) => usersLoader(usersURL, request.signal as RequestInit),
   <Error />,
 );
 
