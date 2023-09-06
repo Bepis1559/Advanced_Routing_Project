@@ -10,7 +10,7 @@ export function Todos(): ReactElement {
   }
   return (
     <>
-      <h1 className="page-title p-5">Todos</h1>
+      <h1 className="page-title p-3">Todos</h1>
       <ul>
         {todos.map(({ completed, title, id }) => (
           <li key={id} className={completed ? "strike-through" : ""}>
