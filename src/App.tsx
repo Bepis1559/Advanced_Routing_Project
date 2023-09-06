@@ -1,10 +1,11 @@
 import { ReactElement } from "react";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
-import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
+// import {  useNavigation } from "react-router-dom";
 
 export function App(): ReactElement {
-  const { state } = useNavigation();
+  // const { state } = useNavigation();
 
   return (
     <>
