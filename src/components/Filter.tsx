@@ -6,7 +6,6 @@ type props = {
   userId: string;
   query: string;
 };
-// Create context for the loading state of the author select and use it here too
 export function Filter({ userId, query }: props): ReactElement {
   return (
     <Form method="get" action="/posts" className="form mb-4">
