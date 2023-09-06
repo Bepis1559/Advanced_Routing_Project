@@ -3,6 +3,7 @@ import "../App.css";
 import { Await, useAsyncValue, useLoaderData } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { usersEndPoint } from "../json/urlEndPoints.json";
+import { PostsSkeleton } from "../skeletons/PostsSkeleton";
 export function Users(): ReactElement {
   const { usersPromise } = useLoaderData() as Record<string, Promise<user[]>>;
 
@@ -10,7 +11,7 @@ export function Users(): ReactElement {
     <main className="container">
       <h1 className="page-title">Users</h1>
       <div className="card-grid">
-        <Suspense fallback={<>Loading...</>}>
+        <Suspense fallback={<PostsSkeleton />}>
           <Await resolve={usersPromise}>
             <UsersCards />
           </Await>
