@@ -59,7 +59,7 @@ export async function postsLoader(
     : (postsUrl = `${postsUrl}?q=${query}`);
 
   if (userId == "0") {
-    postsUrl = initialPostsUrl;
+    postsUrl = `${initialPostsUrl}?q=${query}`;
   }
   // const posts: post[] = await getAll(postsUrl, signal);
   // const result = { posts: posts };
