@@ -2,9 +2,21 @@ import { type ReactElement } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-export function CardSkeleton(): ReactElement {
+type CardSkeletonProps = {
+  shoudCardBeSmaller: boolean;
+};
+
+export function CardSkeleton({
+  shoudCardBeSmaller,
+}: CardSkeletonProps): ReactElement {
   return (
-    <div className="card">
+    <div
+      style={
+        shoudCardBeSmaller
+          ? { maxWidth: "50em", marginInline: "auto" }
+          : undefined
+      }
+      className="card">
       <div className="card-header">
         <Skeleton />
       </div>

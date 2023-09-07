@@ -7,7 +7,7 @@ export async function getAll(
   redirectPathIfResponseIsNotOk = "/error",
 ) {
   const res = await fetch(url, signal);
-  CreateDelay(500);
+  CreateDelay(1000);
   if (res.ok) return res.json();
   throw redirect(redirectPathIfResponseIsNotOk);
 }
@@ -20,6 +20,7 @@ export async function getById(
   signal ? signal : new AbortController().signal;
   url = `${url}/${id}`;
   const res = await fetch(url, signal);
+
   if (res.ok) return res.json();
   throw redirect(redirectPathIfResponseIsNotOk);
 }

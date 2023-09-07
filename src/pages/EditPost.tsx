@@ -16,7 +16,7 @@ export function EditPost(): ReactElement {
   return (
     <div className="container">
       <h1 className="page-title">Edit Post</h1>
-      <Suspense fallback={<CardSkeleton />}>
+      <Suspense fallback={<CardSkeleton shoudCardBeSmaller={true} />}>
         {/* <Await resolve={Promise.all([currentPostPromise, currentUserPromise])}> */}
         <Form method="post" action="/posts/new" className="form">
           <div className="form-row">

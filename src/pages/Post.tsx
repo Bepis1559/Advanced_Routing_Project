@@ -13,7 +13,7 @@ export function Post(): ReactElement {
     useLoaderData() as postDeferredResult;
 
   return (
-    <Suspense fallback={<PostsSkeleton />}>
+    <Suspense fallback={<PostsSkeleton shoudCardBeSmaller={false} />}>
       <Await
         resolve={Promise.all([
           currentPostPromise,
