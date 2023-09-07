@@ -58,8 +58,6 @@ export function postsLoader(
   if (userId == "0") {
     postsUrl = `${initialPostsUrl}?q=${query}`;
   }
-  // const posts: post[] = await getAll(postsUrl, signal);
-  // const result = { posts: posts };
   const deferredResult: postsDeferredResult = {
     postsPromise: getAll(postsUrl, signal),
   };

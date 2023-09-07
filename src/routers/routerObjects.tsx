@@ -23,13 +23,9 @@ import { Users } from "../pages/Users";
 import { EditPost } from "../pages/EditPost";
 import { editPostAction, createNewPostAction } from "./actions";
 import { NewPost } from "../pages/NewPost";
-const { usersEndPoint, postsEndPoint, commentsEndPoint, todosEndPoint } =
-  urlEndPoints;
-const localServerUrl = "http://127.0.0.1:3000";
-const usersURL = `${localServerUrl}${usersEndPoint}`;
-const postsUrl = `${localServerUrl}${postsEndPoint}`;
-const commentsUrl = `${localServerUrl}${commentsEndPoint}`;
-const todosUrl = `${localServerUrl}${todosEndPoint}`;
+const { usersEndPoint, postsEndPoint, todosEndPoint } = urlEndPoints;
+const { VITE_usersURL, VITE_postsUrl, VITE_commentsUrl, VITE_todosUrl } =
+  import.meta.env;
 
 export const defaultRoute = createRouterObject(
   "*",
@@ -40,7 +36,8 @@ export const defaultRoute = createRouterObject(
 export const usersRoute = createRouterObject(
   usersEndPoint,
   <Users />,
-  async ({ request }) => usersLoader(usersURL, request.signal as RequestInit),
+  async ({ request }) =>
+    usersLoader(VITE_usersURL, request.signal as RequestInit),
   <Error />,
 );
 export const editPostRoute = createRouterObject(
@@ -48,27 +45,27 @@ export const editPostRoute = createRouterObject(
   <EditPost />,
   async ({ request, params }) =>
     editPostLoader(
-      postsUrl,
-      usersURL,
+      VITE_postsUrl,
+      VITE_usersURL,
       params as unknown as post,
       request.signal as RequestInit,
     ),
   <Error />,
-  async ({ request }) => editPostAction(postsUrl, request as Request),
+  async ({ request }) => editPostAction(VITE_postsUrl, request as Request),
 );
 export const newPostRoute = createRouterObject(
   `${postsEndPoint}/new`,
   <NewPost />,
   undefined,
   <Error />,
-  async ({ request }) => createNewPostAction(postsUrl, request as Request),
+  async ({ request }) => createNewPostAction(VITE_postsUrl, request as Request),
 );
 
 export const postsRoute = createRouterObject(
   postsEndPoint,
   <Posts />,
   async ({ request: { signal, url } }) =>
-    postsLoader(postsUrl, signal as RequestInit, url),
+    postsLoader(VITE_postsUrl, signal as RequestInit, url),
   <Error />,
 );
 
@@ -76,7 +73,7 @@ export const todosRoute = createRouterObject(
   todosEndPoint,
   <Todos />,
   async ({ request: { signal } }) =>
-    TodosLoader(todosUrl, signal as RequestInit),
+    TodosLoader(VITE_todosUrl, signal as RequestInit),
   <Error />,
 );
 export const errorRoute = createRouterObject(
@@ -91,9 +88,9 @@ export const postRoute = createRouterObject(
   <Post />,
   async ({ request, params }) =>
     postLoader(
-      postsUrl,
-      usersURL,
-      commentsUrl,
+      VITE_postsUrl,
+      VITE_usersURL,
+      VITE_commentsUrl,
       params as unknown as post,
       request.signal as RequestInit,
     ),
@@ -105,9 +102,9 @@ export const userRoute = createRouterObject(
   <User />,
   async ({ request, params }) =>
     userLoader(
-      postsUrl,
-      usersURL,
-      todosUrl,
+      VITE_postsUrl,
+      VITE_usersURL,
+      VITE_todosUrl,
       request.signal as RequestInit,
       params as unknown as user,
     ),
