@@ -17,7 +17,6 @@ export function EditPost(): ReactElement {
     <div className="container">
       <h1 className="page-title">Edit Post</h1>
       <Suspense fallback={<CardSkeleton shoudCardBeSmaller={true} />}>
-        {/* <Await resolve={Promise.all([currentPostPromise, currentUserPromise])}> */}
         <Form method="post" action="/posts/new" className="form">
           <div className="form-row">
             <div className="form-group error">
@@ -49,7 +48,6 @@ export function EditPost(): ReactElement {
             </Link>
           </div>
         </Form>
-        {/* </Await> */}
       </Suspense>
     </div>
   );
