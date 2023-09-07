@@ -8,21 +8,9 @@ export type postLoaderDataType = {
   currentPostComments: comment[];
 };
 
-// should have the post Title,the userName , post body , all related comments with their email and body
 export function Post(): ReactElement {
-  // const { currentUser, currentPost, currentPostComments } =
-  //   useLoaderData() as postLoaderDataType;
   const { currentPostPromise, currentUserPromise, allCommentsPromise } =
     useLoaderData() as postDeferredResult;
-
-  // const resolve = {
-  //   currentPost: currentPostPromise,
-  //   currentUser: currentUserPromise,
-  //   allComments: allCommentsPromise,
-  // };
-  // console.log(resolve);
-  // const { name, id } = currentUser;
-  // const { id: postId, title, body: postBody } = currentPost;
 
   return (
     <Suspense fallback={<PostsSkeleton />}>
@@ -47,8 +35,6 @@ type asyncValueType = [
 function PostContent(): ReactElement {
   const [currentPost, currentUser, allComments] =
     useAsyncValue() as asyncValueType;
-
-  // const { currentPost, currentUser, allComments } = useAsyncValue()
   const { name, id } = currentUser;
   const { id: postId, title, body: postBody } = currentPost;
   return (

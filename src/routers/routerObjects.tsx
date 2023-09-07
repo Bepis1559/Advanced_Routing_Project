@@ -6,6 +6,7 @@ import { Todos } from "../pages/Todos";
 import { Post } from "../pages/Post";
 import {
   TodosLoader,
+  editPostLoader,
   postLoader,
   postsLoader,
   userLoader,
@@ -19,8 +20,9 @@ import {
   RouteObject,
 } from "react-router-dom";
 import { Users } from "../pages/Users";
-import { NewPost } from "../pages/NewPost";
+import { EditPost } from "../pages/EditPost";
 import { editPostAction, createNewPostAction } from "./actions";
+import { NewPost } from "../pages/NewPost";
 const { usersEndPoint, postsEndPoint, commentsEndPoint, todosEndPoint } =
   urlEndPoints;
 const localServerUrl = "http://127.0.0.1:3000";
@@ -41,35 +43,31 @@ export const usersRoute = createRouterObject(
   async ({ request }) => usersLoader(usersURL, request.signal as RequestInit),
   <Error />,
 );
-
-export const newPostRoute = createRouterObject(
-  `${postsEndPoint}/new`,
-  <NewPost pageTitle="New Post" />,
-  undefined,
-  <Error />,
-  async ({ request }) => createNewPostAction(postsUrl, request as Request),
-);
-
 export const editPostRoute = createRouterObject(
   `${postsEndPoint}/:id/edit`,
-  <NewPost pageTitle="Edit post" />,
+  <EditPost />,
   async ({ request, params }) =>
-    postLoader(
+    editPostLoader(
       postsUrl,
       usersURL,
-      commentsUrl,
       params as unknown as post,
       request.signal as RequestInit,
     ),
   <Error />,
   async ({ request }) => editPostAction(postsUrl, request as Request),
 );
+export const newPostRoute = createRouterObject(
+  `${postsEndPoint}/new`,
+  <NewPost />,
+  undefined,
+  <Error />,
+  async ({ request }) => createNewPostAction(postsUrl, request as Request),
+);
 
 export const postsRoute = createRouterObject(
   postsEndPoint,
   <Posts />,
   async ({ request: { signal, url } }) =>
-    // postsLoader(postsUrl, usersURL, signal as RequestInit, url),
     postsLoader(postsUrl, signal as RequestInit, url),
   <Error />,
 );
@@ -87,6 +85,7 @@ export const errorRoute = createRouterObject(
   undefined,
   <Error />,
 );
+
 export const postRoute = createRouterObject(
   `${postsEndPoint}/:id`,
   <Post />,

@@ -32,18 +32,6 @@ export async function postLoader(
   signal: RequestInit,
 ) {
   const currentPost: post = await getById(postsUrl, params?.id, signal);
-  // const currentUser: user = await getById(usersUrl, currentPost.userId, signal);
-  // const allComments: comment[] = await getAll(commentsUrl, signal);
-  // const currentPostComments = allComments.filter(
-  //   (comment) => comment.postId == currentPost.id,
-  // );
-  // const result = {
-  //   currentPost: currentPost,
-  //   currentUser: currentUser,
-  //   currentPostComments: currentPostComments,
-  // };
-
-  // return result;
 
   const deferredResult: postDeferredResult = {
     currentPostPromise: getById(postsUrl, params?.id, signal),
@@ -54,7 +42,7 @@ export async function postLoader(
   return defer(deferredResult);
 }
 
-export async function postsLoader(
+export function postsLoader(
   postsUrl: string,
   signal: RequestInit,
   url: string,
@@ -88,6 +76,21 @@ export function usersLoader(usersURL: string, signal: RequestInit) {
 export function TodosLoader(todosUrl: string, signal: RequestInit) {
   const deferredResult: todosDeferredResult = {
     todosPromise: getAll(todosUrl, signal),
+  };
+  return defer(deferredResult);
+}
+
+export async function editPostLoader(
+  postsUrl: string,
+  usersUrl: string,
+  params: post,
+  signal: RequestInit,
+) {
+  const currentPost: post = await getById(postsUrl, params?.id, signal);
+
+  const deferredResult: editPostDeferredResult = {
+    currentPostPromise: getById(postsUrl, params?.id, signal),
+    currentUserPromise: getById(usersUrl, currentPost.userId, signal),
   };
   return defer(deferredResult);
 }

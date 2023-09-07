@@ -6,3 +6,7 @@ type postDeferredResult = {
   currentUserPromise: Promise<user>;
   allCommentsPromise: Promise<comment[]>;
 };
+type editPostDeferredResult = {
+  currentPostPromise: Promise<post>;
+  currentUserPromise: Promise<user>;
+};
