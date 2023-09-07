@@ -39,10 +39,7 @@ export function NewPost({ pageTitle }: props): ReactElement {
             />
             {/* <div className="error-message">Required</div> */}
           </div>
-          <FormGroup
-            isAllOptionNeeded={false}
-            selectDefaultValue={userId.toString()}
-          />
+          <FormGroup isAllOptionNeeded={false} userId={userId.toString()} />
         </div>
         <div className="form-row">
           <div className="form-group">
