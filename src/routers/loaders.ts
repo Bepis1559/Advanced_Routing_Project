@@ -32,17 +32,26 @@ export async function postLoader(
   signal: RequestInit,
 ) {
   const currentPost: post = await getById(postsUrl, params?.id, signal);
-  const currentUser: user = await getById(usersUrl, currentPost.userId, signal);
-  const allComments: comment[] = await getAll(commentsUrl, signal);
-  const currentPostComments = allComments.filter(
-    (comment) => comment.postId == currentPost.id,
-  );
+  // const currentUser: user = await getById(usersUrl, currentPost.userId, signal);
+  // const allComments: comment[] = await getAll(commentsUrl, signal);
+  // const currentPostComments = allComments.filter(
+  //   (comment) => comment.postId == currentPost.id,
+  // );
+  // const result = {
+  //   currentPost: currentPost,
+  //   currentUser: currentUser,
+  //   currentPostComments: currentPostComments,
+  // };
 
-  return {
-    currentUser: currentUser,
-    currentPost: currentPost,
-    currentPostComments: currentPostComments,
+  // return result;
+
+  const deferredResult: postDeferredResult = {
+    currentPostPromise: getById(postsUrl, params?.id, signal),
+    currentUserPromise: getById(usersUrl, currentPost.userId, signal),
+    allCommentsPromise: getAll(commentsUrl, signal),
   };
+
+  return defer(deferredResult);
 }
 
 export async function postsLoader(

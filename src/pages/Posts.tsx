@@ -55,7 +55,6 @@ export function Posts(): ReactElement {
 
 function PostsCards(): ReactElement {
   const posts = useAsyncValue() as post[];
-
   return (
     <>
       {posts?.map(({ id, title, body }) => (
