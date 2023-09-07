@@ -1,7 +1,7 @@
 import { ReactElement, Suspense } from "react";
 import { Await, Link, useAsyncValue, useLoaderData } from "react-router-dom";
 import { usersEndPoint } from "../json/urlEndPoints.json";
-import { PostsSkeleton } from "../skeletons/PostsSkeleton";
+import { PostSkeleton } from "../skeletons/PostSkeleton";
 export type postLoaderDataType = {
   currentUser: user;
   currentPost: post;
@@ -13,7 +13,7 @@ export function Post(): ReactElement {
     useLoaderData() as postDeferredResult;
 
   return (
-    <Suspense fallback={<PostsSkeleton />}>
+    <Suspense fallback={<PostSkeleton />}>
       <Await
         resolve={Promise.all([
           currentPostPromise,
