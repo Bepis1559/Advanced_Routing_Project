@@ -2,11 +2,11 @@ import { type ReactElement } from "react";
 import { CardSkeleton } from "./CardSkeleton";
 
 type CardSkeletonProps = {
-  shoudCardBeSmaller: boolean;
+  shoudCardBeSmaller?: boolean;
 };
 
 export function PostsSkeleton({
-  shoudCardBeSmaller,
+  shoudCardBeSmaller = false,
 }: CardSkeletonProps): ReactElement {
   return (
     <>

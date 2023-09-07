@@ -38,11 +38,11 @@ export function Posts(): ReactElement {
       />
       {arePostsGettingFiltered ? (
         <div className="card-grid">
-          <PostsSkeleton shoudCardBeSmaller={false} />
+          <PostsSkeleton />
         </div>
       ) : (
         <div className="card-grid">
-          <Suspense fallback={<PostsSkeleton shoudCardBeSmaller={false} />}>
+          <Suspense fallback={<PostsSkeleton />}>
             <Await resolve={postsPromise}>
               <PostsCards />
             </Await>
